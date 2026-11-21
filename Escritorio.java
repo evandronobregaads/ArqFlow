@@ -1,0 +1,65 @@
+package arqflow;
+
+import java.util.ArrayList;
+
+public class Escritorio {
+    private ArrayList<Projeto> projetos;
+    private ArrayList<Cliente> clientes;
+
+    public Escritorio(ArrayList<Projeto> projetos, ArrayList<Cliente> clientes) {
+        this.projetos = projetos;
+        this.clientes = clientes;
+    }
+
+    public ArrayList<Projeto> getProjetos() {
+        return projetos;
+    }
+
+    public void setProjetos(ArrayList<Projeto> projetos) {
+        this.projetos = projetos;
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public boolean cadastrarClientes(Cliente cliente){
+        if (cliente == null){
+            return false;
+        }
+        for (Cliente c : clientes){
+            if (c.getCodigo().equals(cliente.getCodigo())){
+                return false;
+            }
+        }
+        clientes.add(cliente);
+        return true;
+    }
+
+    public boolean cadastrarProjeto(Projeto projeto){
+        if (projeto == null){
+            return false;
+        }
+        boolean clientesCadastrados = false;
+        for (Cliente c: clientes){
+            if (c.getCodigo().equals(projeto.getCliente().getCodigo()) && c.isAtivo()){
+                clientesCadastrados = true;
+                break;
+            }
+        }
+        if (!clientesCadastrados){
+            return false;
+        }
+        for (Projeto p: projetos){
+            if (p.getCodigo().equals(projeto.getCodigo())){
+                return false;
+            }
+        }
+        projetos.add(projeto);
+        return true;
+    }
+}
