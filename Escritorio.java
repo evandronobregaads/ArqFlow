@@ -62,4 +62,23 @@ public class Escritorio {
         projetos.add(projeto);
         return true;
     }
+
+    public void relatorioProjetos(){
+        if (projetos.isEmpty()){
+            System.out.println("Nenhum projeto cadastrado!");
+            return;
+        }
+        for (Projeto p: projetos){
+            p.exibirResumo();
+        }
+    }
+
+    public void relatorioFinanceiro(){
+      double totalHonorarios = 0;
+      for (Projeto p: projetos){
+          System.out.printf("%s (%s): R$ %.2f%n", p.getNome(), p.getTipoProjeto(), p.calcularHonorarios());
+          totalHonorarios += p.calcularHonorarios();
+      }
+      System.out.printf("Total de honorários: R$ %.2f%n", totalHonorarios)
+    }
 }
