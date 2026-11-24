@@ -3,21 +3,21 @@ package arqflow;
 import java.time.LocalDate;
 
 public class EtapaProjeto {
-    private String nome;
+    private TipoEtapa tipo;
     private boolean concluida;
     private LocalDate dataConclusao;
 
-    public EtapaProjeto(String nome) {
-        if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("Nome da etapa inválido!");
+    public EtapaProjeto(TipoEtapa tipo) {
+        if (tipo == null) {
+            throw new IllegalArgumentException("Tipo de etapa inválido!");
         }
-        this.nome = nome;
+        this.tipo = tipo;
         this.concluida = false;
         this.dataConclusao = null;
     }
 
-    public String getNome() {
-        return nome;
+    public TipoEtapa getTipo() {
+        return tipo;
     }
 
     public boolean isConcluida() {
@@ -40,7 +40,7 @@ public class EtapaProjeto {
     @Override
     public String toString() {
         return "EtapaProjeto{" +
-                "nome='" + nome + '\'' +
+                "Tipo='" + tipo + '\'' +
                 ", concluida=" + concluida +
                 ", dataConclusao=" + dataConclusao +
                 '}';
