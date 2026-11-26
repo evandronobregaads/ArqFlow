@@ -13,7 +13,7 @@ public class CobrancaAVista implements PlanoCobranca{
             throw new IllegalArgumentException("Dados inválidos");
         }
 
-        ArrayList<Parcela> parcelas = new ArrayList<Parcela>();
+        ArrayList<Parcela> parcelas = new ArrayList<>();
         parcelas.add(new Parcela(1, valor, vencimento, null));
         return parcelas;
     }
