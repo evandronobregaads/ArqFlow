@@ -1,8 +1,8 @@
 package arqflow;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface PlanoCobranca {
-
-    public ArrayList<Parcela> gerarParcelas();
+    ArrayList<Parcela> gerarParcelas(double valor, LocalDate vencimento);
 }
