@@ -6,7 +6,7 @@ public class CobrancaParcelada implements PlanoCobranca {
     private int numParcelas;
 
     public CobrancaParcelada(int numParcelas) {
-        this.numParcelas = numParcelas;
+        setNumParcelas(numParcelas);
     }
 
     public int getNumParcelas() {
@@ -30,14 +30,17 @@ public class CobrancaParcelada implements PlanoCobranca {
         double somaAnteriores = 0;
         for (int i = 0; i < numParcelas; i++){
             double valorAtual;
-            if (i == numParcelas){
-                valorAtual = Math.round((valor / numParcelas) * 100.0)/ 100.0;
-            }else{
+            if (i == numParcelas - 1){
+                valorAtual = Math.round((valor - somaAnteriores) * 100.0)/ 100.0;
+            } else {
                 valorAtual = valorParcela;
-                somaAnteriores += valorParcela;
             }
-            LocalDate vencimentoParcela = vencimento.plusMonths(i - 1);
-            parcelas.add(new Parcela(i , valorAtual, vencimentoParcela, null));
+            if (valorAtual <= 0) {
+                throw new IllegalArgumentException("Valor insuficiente para a quantidade de parcelas!");
+            }
+            somaAnteriores += valorAtual;
+            LocalDate vencimentoParcela = vencimento.plusMonths(i);
+            parcelas.add(new Parcela(i + 1, valorAtual, vencimentoParcela, null));
         }
         return parcelas;
     }
