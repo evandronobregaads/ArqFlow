@@ -4,7 +4,4 @@ public enum SituacaoParcela {
     PENDENTE,
     ATRASADA,
     PAGA;
-
-    SituacaoParcela() {
-    }
 }
