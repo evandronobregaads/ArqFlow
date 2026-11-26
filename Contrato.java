@@ -8,36 +8,33 @@ public class Contrato {
     private int numero;
     private LocalDate dataAssinatura;
     private ArrayList<Parcela> parcelas;
+    private Projeto projeto;
 
-    public Contrato(double valorContratado, int numero, LocalDate dataAssinatura, ArrayList<Parcela> parcelas) {
+    public Contrato(double valorContratado, int numero, LocalDate dataAssinatura, ArrayList<Parcela> parcelas, Projeto projeto) {
+        if (valorContratado <= 0 || numero <= 0 || dataAssinatura == null || parcelas == null || parcelas.isEmpty() || projeto == null) {
+            throw new IllegalArgumentException("Dados inválidos para o contrato!");
+        }
         this.valorContratado = valorContratado;
         this.numero = numero;
         this.dataAssinatura = dataAssinatura;
-        this.parcelas = new ArrayList<>();
+        this.parcelas = new ArrayList<>(parcelas);
+        this.projeto = projeto;
+    }
+
+    public Projeto getProjeto() {
+        return projeto;
     }
 
     public double getValorCobrado() {
         return valorContratado;
     }
 
-    public void setValorCobrado(double valorContratado) {
-        this.valorContratado = valorContratado;
-    }
-
     public ArrayList<Parcela> getParcela() {
         return parcelas;
     }
 
-    public void setParcela(ArrayList<Parcela> parcelas) {
-        this.parcelas = parcelas;
-    }
-
     public int getNumero() {
         return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
     }
 
     public LocalDate getDataAssinatura() {
