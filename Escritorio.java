@@ -7,8 +7,11 @@ public class Escritorio {
     private ArrayList<Cliente> clientes;
 
     public Escritorio(ArrayList<Projeto> projetos, ArrayList<Cliente> clientes) {
-        this.projetos = projetos;
-        this.clientes = clientes;
+        if (projetos == null || clientes == null) {
+            throw new IllegalArgumentException("Listas inválidas!");
+        }
+        this.projetos = new ArrayList<>(projetos);
+        this.clientes = new ArrayList<>(clientes);
     }
 
     public ArrayList<Projeto> getProjetos() {
@@ -79,6 +82,6 @@ public class Escritorio {
           System.out.printf("%s (%s): R$ %.2f%n", p.getNome(), p.getTipoProjeto(), p.calcularHonorarios());
           totalHonorarios += p.calcularHonorarios();
       }
-      System.out.printf("Total de honorários: R$ %.2f%n", totalHonorarios)
+      System.out.printf("Total de honorários: R$ %.2f%n", totalHonorarios);
     }
 }
