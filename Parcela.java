@@ -9,6 +9,9 @@ public class Parcela{
     private LocalDate dataDePagamento;
 
     public Parcela(int numero, double valor, LocalDate vencimento, LocalDate dataDePagamento) {
+        if(valor <= 0){
+            throw new IllegalArgumentException("==> Valor é negativo!");
+        }
         this.numero = numero;
         this.valor = valor;
         this.vencimento = vencimento;
@@ -28,9 +31,11 @@ public class Parcela{
     }
 
     public void setValor(double valor) {
+        if(valor <= 0){
+            throw new IllegalArgumentException("==> Valor é negativo!");
+        }
         this.valor = valor;
     }
-
     public LocalDate getVencimento() {
         return vencimento;
     }
@@ -43,10 +48,6 @@ public class Parcela{
         return dataDePagamento;
     }
 
-    public void setDataDePagamento(LocalDate dataDePagamento) {
-        this.dataDePagamento = dataDePagamento;
-    }
-
     public boolean quitar(LocalDate data){
         if (data == null || dataDePagamento != null){
             return false;
@@ -56,7 +57,7 @@ public class Parcela{
     }
 
     public SituacaoParcela getSituacao(LocalDate dataReferencia){
-        if (dataReferencia != null){
+        if (dataReferencia == null){
             throw new IllegalArgumentException("Data Inválida!");
         }
 
